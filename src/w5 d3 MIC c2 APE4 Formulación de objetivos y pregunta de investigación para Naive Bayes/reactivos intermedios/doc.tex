@@ -1,0 +1,156 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{helvet}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\renewcommand{\familydefault}{\sfdefault}
+\geometry{
+  a4paper,
+  left=3.0cm,
+  right=3.0cm,
+  top=2.35cm,
+  bottom=2.35cm,
+  headheight=1.9cm,
+  headsep=0.45cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.08}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.35cm]{reporte_tecnico_overleaf_logo.png}}
+\fancyhead[R]{\vspace{0.1cm}\small FEIRNNR - Carrera de Computación}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\makeatletter
+\renewcommand{\headrule}{%
+  {\color{gray!65}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}%
+}
+\makeatother
+
+\titleformat{\section}
+  {\bfseries\fontsize{15}{17}\selectfont}
+  {\thesection.}{0.8em}{}
+\titlespacing*{\section}{0pt}{0.7ex}{0.2ex}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\vspace*{0.15cm}
+
+\begin{center}
+{\bfseries\fontsize{23}{26}\selectfont
+Reporte Técnico de Actividades\\
+Práctico-Experimentales Nro. 004\par}
+\end{center}
+
+\section{Datos de Identificación del Estudiante y la Práctica}
+
+\noindent
+\begin{tabularx}{\textwidth}{|L{0.43\textwidth}|Y|}
+\hline
+\textbf{Nombre del estudiante(s)} & Wilson Patricio Palma Samaniego \\ \hline
+\textbf{Asignatura} & Metodología de la Investigación en Computación \\ \hline
+\textbf{Ciclo} & 4 A \\ \hline
+\textbf{Unidad} & 1 \\ \hline
+\textbf{Resultado de aprendizaje de la unidad} & R1. Contrasta la investigación y sus tipos con los métodos en el área de Computación y afines. \\ \hline
+\textbf{Práctica Nro.} & 004 \\ \hline
+\textbf{Título de la Práctica} & Formulación de objetivos y pregunta de investigación \\ \hline
+\textbf{Nombre del Docente} & Luis Antonio Chamba Eras \\ \hline
+\textbf{Fecha} & Martes 5 de mayo de 2026 \\ \hline
+\textbf{Horario} & 10h30 -- 11h30 \\ \hline
+\textbf{Lugar} & EVA-Moodle / Aula \\ \hline
+\textbf{Tiempo planificado en el Sílabo} & 1 hora \\ \hline
+\end{tabularx}
+
+\section{Objetivo(s) de la Práctica}
+Redactar el objetivo general, los objetivos específicos y la pregunta de investigación del proyecto integrador, aplicando criterios SMART.
+
+\section{Materiales y reactivos}
+
+\begin{itemize}[leftmargin=1.2cm,itemsep=0.2em]
+  \item Computador
+  \item Plantilla de formulación de objetivos (EVA-Moodle)
+  \item Taxonomía de Bloom revisada
+  \item Problema de investigación versión 1 (APE 3)
+\end{itemize}
+
+\section{Equipos y herramientas}
+
+EVA-Moodle; guía institucional de práctica.
+
+\section{Procedimiento / Metodología Ejecutada}
+
+Desarrollo (ABI -- Aprendizaje Basado en Investigación):
+
+\begin{enumerate}[leftmargin=1.2cm,itemsep=0.2em]
+  \item Revisar el problema de investigación versión 1.
+  \item Formular la pregunta de investigación derivada del problema.
+  \item Redactar preguntas de investigación coherentes con el problema, la evidencia bibliográfica y el enfoque cuantitativo.
+  \item Verificar la coherencia problema--pregunta--alcance usando criterios SMART.
+  \item Subir el reporte técnico en PDF a EVA-Moodle.
+\end{enumerate}
+
+\section{Resultados}
+
+Con base en el problema de investigación sobre la clasificación automática de texto con Naive Bayes, se formularon tres preguntas de investigación alineadas con los tipos de investigación \textbf{descriptiva}, \textbf{aplicada} y \textbf{experimental}. Se excluye la investigación exploratoria porque el problema ya se encuentra delimitado y respaldado por evidencia bibliográfica previa.
+
+\begin{enumerate}[leftmargin=1.2cm,itemsep=0.7em]
+  \item \textbf{Investigación descriptiva}\\
+  \textit{Pregunta de investigación:} ¿Cuáles son las características del rendimiento del clasificador Naive Bayes al analizar textos cortos en conjuntos de datos pequeños y con clases desbalanceadas?\\
+  \textit{Variable independiente (VI):} características del corpus textual (longitud del texto, tamaño del conjunto de datos y balance de clases).\\
+  \textit{Variable dependiente (VD):} rendimiento del clasificador Naive Bayes, medido mediante precisión, recall, F1-score y accuracy.\\
+  \textit{Propósito:} describir el comportamiento del modelo en el contexto estudiado sin establecer causalidad.
+
+  \item \textbf{Investigación aplicada}\\
+  \textit{Pregunta de investigación:} ¿De qué manera la aplicación de técnicas de ponderación de características mejora el desempeño del clasificador Naive Bayes en la clasificación automática de textos cortos?\\
+  \textit{Variable independiente (VI):} aplicación de técnicas de ponderación de características.\\
+  \textit{Variable dependiente (VD):} desempeño del clasificador Naive Bayes, expresado en métricas de clasificación.\\
+  \textit{Propósito:} resolver un problema práctico mediante la incorporación de una mejora técnica al modelo.
+
+  \item \textbf{Investigación experimental}\\
+  \textit{Pregunta de investigación:} ¿Qué efecto produce la incorporación de ponderación de características en el rendimiento del clasificador Naive Bayes, al comparar una versión estándar con una versión mejorada bajo las mismas condiciones de evaluación?\\
+  \textit{Variable independiente (VI):} condición del modelo de clasificación (Naive Bayes estándar vs. Naive Bayes mejorado con ponderación de características).\\
+  \textit{Variable dependiente (VD):} rendimiento del clasificador, medido mediante precisión, recall, F1-score y accuracy.\\
+  \textit{Propósito:} comprobar de manera controlada si la modificación introducida genera un cambio en el desempeño del modelo.
+\end{enumerate}
+
+\section{Preguntas de Control}
+
+\begin{itemize}[leftmargin=1.2cm,itemsep=0.35em]
+  \item \textbf{¿Cuál es la relación entre la pregunta de investigación y los objetivos?}\\
+  La pregunta de investigación delimita el problema central que se desea resolver, mientras que los objetivos traducen esa pregunta en acciones concretas y verificables. En consecuencia, ambos elementos deben mantener coherencia temática, metodológica y de alcance.
+
+  \item \textbf{¿Qué verbos de la taxonomía de Bloom son más adecuados para objetivos de investigación tecnológica?}\\
+  Para investigación tecnológica resultan más adecuados verbos como \textit{analizar}, \textit{diseñar}, \textit{implementar}, \textit{evaluar}, \textit{comparar} y \textit{optimizar}, porque expresan procesos observables y medibles relacionados con el desarrollo y validación de soluciones.
+\end{itemize}
+
+\nocite{*}
+\section{Bibliografía / Referencias}
+\bibliographystyle{ieeetr}
+\bibliography{referencias}
+
+\section{Anexos}
+
+Se incluyen, de ser necesario, los recursos de apoyo utilizados para la formulación de las preguntas de investigación.
+
+\end{document}

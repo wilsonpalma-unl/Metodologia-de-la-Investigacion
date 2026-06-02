@@ -1,0 +1,114 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{helvet}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\renewcommand{\familydefault}{\sfdefault}
+\geometry{
+  a4paper,
+  left=3.0cm,
+  right=3.0cm,
+  top=2.35cm,
+  bottom=2.35cm,
+  headheight=1.9cm,
+  headsep=0.45cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.08}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.35cm]{reporte_tecnico_overleaf_logo.png}}
+\fancyhead[R]{\vspace{0.1cm}\small FEIRNNR - Carrera de Computación}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\makeatletter
+\renewcommand{\headrule}{%
+  {\color{gray!65}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}%
+}
+\makeatother
+
+\titleformat{\section}
+  {\bfseries\fontsize{15}{17}\selectfont}
+  {\thesection.}{0.8em}{}
+\titlespacing*{\section}{0pt}{0.7ex}{0.2ex}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\vspace*{0.15cm}
+
+\begin{center}
+{\bfseries\fontsize{23}{26}\selectfont
+Reporte Técnico de Actividades\\
+Práctico-Experimentales Nro. 001\par}
+\end{center}
+
+\section{Datos de Identificación del Estudiante y la Práctica}
+
+\noindent
+\begin{tabularx}{\textwidth}{|L{0.43\textwidth}|Y|}
+\hline
+\textbf{Nombre del estudiante(s)} & Edison Leonardo Coronel Romero \\ \hline
+\textbf{Asignatura} & Desarrollo Basado en Plataformas \\ \hline
+\textbf{Ciclo} & 5 A \\ \hline
+\textbf{Unidad} & 1 \\ \hline
+\textbf{Resultado de aprendizaje de la unidad} &  \\ \hline
+\textbf{Práctica Nro.} & 001 \\ \hline
+\textbf{Título de la Práctica} & Implementar un servicio REST con Node.js \\ \hline
+\textbf{Nombre del Docente} & Edison Leonardo Coronel Romero \\ \hline
+\textbf{Fecha} & Viernes 3 de octubre \\ \hline
+\textbf{Horario} & 07h30 -- 10h30 \\ \hline
+\textbf{Lugar} & \makecell[tl]{Laboratorio Computación aplicada\\Laboratorio Desarrollo de Software\\Laboratorio de redes y Sistemas Operativos\\Laboratorio Virtual\\EVA\\Aula} \\ \hline
+\textbf{Tiempo planificado en el Sílabo} & 3 horas \\ \hline
+\end{tabularx}
+
+\section{Objetivo(s) de la Práctica}
+Escriba el objetivo de la práctica (copiado de la guía proporcionada por el docente).
+
+\section{Materiales, Reactivos, Equipos y Herramientas}
+Liste los materiales, reactivos, equipos y herramientas utilizados en la práctica, confirmando los de la guía o agregando los adicionales.
+
+\section{Procedimiento / Metodología Ejecutada}
+Describa brevemente los pasos que siguió durante la ejecución de la práctica.
+
+\section{Resultados}
+Incluya evidencias del trabajo realizado (tablas, gráficos, capturas de pantalla, registros de ejecución, modelos, programas, informes, etc.).
+
+\newpage
+
+\section{Preguntas de Control}
+Responda a las preguntas del docente.
+
+\section{Conclusiones}
+Redacte las principales conclusiones de la práctica, vinculándolas con el objetivo planteado.
+
+\section{Recomendaciones}
+Incluya sugerencias para mejorar la práctica o su aplicación en casos reales.
+
+\section{Bibliografía / Referencias}
+Liste las fuentes adicionales consultadas siguiendo el formato IEEE.
+
+\section{Anexos}
+Recursos de apoyo para cada una de las secciones anteriores.
+
+\end{document}

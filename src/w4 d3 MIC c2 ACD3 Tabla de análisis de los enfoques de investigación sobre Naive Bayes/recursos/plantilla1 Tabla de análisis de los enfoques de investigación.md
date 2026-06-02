@@ -1,0 +1,16 @@
+# Tabla de análisis de los enfoques de investigación
+
+| Artículos | Enfoque Cuantitativo | Enfoque Cualitativo | Enfoque mixto | Observación |
+|---|---|---|---|---|
+|[1]-[5]|...|...|...|...|
+
+# Referencias
+[1] ...
+
+[2] ...
+
+[3] ...
+
+[4] ...
+
+[5] ...

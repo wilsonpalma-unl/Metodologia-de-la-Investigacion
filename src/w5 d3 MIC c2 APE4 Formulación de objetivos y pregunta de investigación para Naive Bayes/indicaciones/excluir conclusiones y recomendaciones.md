@@ -1,0 +1,1 @@
+No incluyas conclusiones y recomendaciones en el latex que generes ya que el docente dijo que por el momento eso no.

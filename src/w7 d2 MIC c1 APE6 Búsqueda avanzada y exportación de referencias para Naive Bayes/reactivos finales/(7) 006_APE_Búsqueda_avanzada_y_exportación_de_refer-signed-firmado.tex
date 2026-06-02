@@ -1,0 +1,304 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{helvet}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{url}
+
+\renewcommand{\familydefault}{\sfdefault}
+\geometry{
+  a4paper,
+  left=3.0cm,
+  right=3.0cm,
+  top=2.35cm,
+  bottom=2.35cm,
+  headheight=1.9cm,
+  headsep=0.45cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.08}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.35cm]{reporte_tecnico_overleaf_logo.png}}
+\fancyhead[R]{\vspace{0.1cm}\small FEIRNNR - Carrera de Computación}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\makeatletter
+\renewcommand{\headrule}{%
+  {\color{gray!65}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}%
+}
+\makeatother
+
+\titleformat{\section}
+  {\bfseries\fontsize{15}{17}\selectfont}
+  {\thesection.}{0.8em}{}
+\titlespacing*{\section}{0pt}{0.7ex}{0.2ex}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\vspace*{0.15cm}
+
+\begin{center}
+{\bfseries\fontsize{23}{26}\selectfont
+Reporte Técnico de Actividades\\
+Práctico-Experimentales Nro. 006\par}
+\end{center}
+
+\section{Datos de Identificación del Estudiante y la Práctica}
+
+\noindent
+\begin{tabularx}{\textwidth}{|L{0.43\textwidth}|Y|}
+\hline
+\textbf{Nombre del estudiante(s)} & Wilson Patricio Palma Samaniego \\ \hline
+\textbf{Asignatura} & Metodología de la Investigación en Computación \\ \hline
+\textbf{Ciclo} & 4 A \\ \hline
+\textbf{Unidad} & 1 \\ \hline
+\textbf{Resultado de aprendizaje de la unidad} & R1. Contrasta la investigación y sus tipos con los métodos en el área de Computación y afines. \\ \hline
+\textbf{Práctica Nro.} & 006 \\ \hline
+\textbf{Título de la Práctica} & Búsqueda avanzada y exportación de referencias \\ \hline
+\textbf{Nombre del Docente} & Luis Antonio Chamba Eras \\ \hline
+\textbf{Fecha} & Martes 19 de mayo de 2026 \\ \hline
+\textbf{Horario} & 10h30 -- 11h30 \\ \hline
+\textbf{Lugar} & EVA-Moodle / Aula \\ \hline
+\textbf{Tiempo planificado en el Sílabo} & 1 hora \\ \hline
+\end{tabularx}
+
+\section{Objetivo(s) de la Práctica}
+Diseñar y ejecutar cadenas de búsqueda avanzada en Scopus e IEEE Xplore, exportando las referencias al gestor bibliográfico.
+
+\section{Materiales, Reactivos, Equipos y Herramientas}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Computador.
+    \item Acceso a Scopus.
+    \item Acceso a IEEE Xplore.
+    \item Mendeley o Zotero.
+    \item Guía de operadores booleanos.
+    \item EVA-Moodle.
+    \item Guía institucional de práctica.
+\end{itemize}
+
+\section{Procedimiento / Metodología Ejecutada}
+La práctica se desarrolló siguiendo el enfoque de Aprendizaje Basado en Investigación (ABI), con los siguientes pasos:
+
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Se definieron las palabras clave del proyecto en inglés y español, con el fin de ampliar la cobertura de búsqueda.
+    \item Se construyeron cadenas de búsqueda utilizando operadores booleanos como AND, OR y NOT.
+    \item Se ejecutaron búsquedas avanzadas en Scopus e IEEE Xplore aplicando filtros de año, tipo de documento y área temática.
+    \item Se evaluaron los resultados obtenidos y se seleccionaron artículos adicionales relevantes para el proyecto.
+    \item Se exportaron las referencias seleccionadas directamente a Mendeley o Zotero.
+    \item Se documentó la cadena de búsqueda empleada y los resultados obtenidos durante la exploración bibliográfica.
+    \item Finalmente, se subió el reporte técnico en formato PDF a EVA-Moodle.
+\end{enumerate}
+
+\section{Resultados}\label{resultados}
+
+\subsection{Pregunta de investigación}\label{pregunta-de-investigaciuxf3n}
+
+¿Qué tan efectivo es Naive Bayes en clasificación de texto?
+
+\subsection{Cadena de búsqueda}\label{cadena-de-buxfasqueda}
+
+\begin{verbatim}
+("naive bayes" OR "naive bayes classifier" OR "naive bayes classification" OR
+"bayes classifier" OR "multinomial naive bayes" OR "bernoulli naive bayes")
+AND
+("text classification" OR "document classification" OR "text categor*" OR
+"text mining" OR "text analytics" OR "natural language processing" OR "NLP" OR
+"sentiment analysis" OR "topic classification" OR "document categor*")
+\end{verbatim}
+
+\subsection{Clasificación de los 44 artículos}\label{clasificaciuxf3n-de-los-44-artuxedculos}
+
+A continuación se presenta la clasificación de los 44 artículos identificados en las fuentes, evaluados según su relevancia para investigar la efectividad de \textbf{Naive Bayes (NB)} en la clasificación de textos.
+
+Los criterios utilizados son:
+\begin{itemize}
+    \item \textbf{Alto:} El artículo se centra específicamente en mejorar el algoritmo, comparar su rendimiento de forma exhaustiva o proponer variantes fundamentales.
+    \item \textbf{Medio:} El artículo aplica NB a un dominio, idioma o tarea específica (por ejemplo, medicina, árabe, detección de clickbait), priorizando la aplicación sobre el estudio teórico de la efectividad general del algoritmo.
+\end{itemize}
+
+\begin{longtable}{|c|c|p{9cm}|}
+\caption{Clasificación de artículos según su relevancia para el estudio de Naive Bayes en clasificación de textos}
+\label{tab:clasificacion-articulos} \\
+\hline
+\textbf{\#} & \textbf{Nivel de Relevancia} & \textbf{DOI o URL del Artículo} \\
+\hline
+\endfirsthead
+
+\hline
+\textbf{\#} & \textbf{Nivel de Relevancia} & \textbf{DOI o URL del Artículo} \\
+\hline
+\endhead
+
+[1]  & \textbf{Alto}  & \url{10.1109/TKDE.2006.180} \\
+\hline
+[2]  & \textbf{Medio} & \url{10.1109/SNPD.2019.8935711} \\
+\hline
+[3]  & \textbf{Alto}  & \url{10.1007/11871637_49} \\
+\hline
+[4]  & \textbf{Alto}  & \url{10.1145/2911451.2911547} \\
+\hline
+[5]  & \textbf{Alto}  & \url{10.1016/J.ENGAPPAI.2016.02.002} \\
+\hline
+[6]  & \textbf{Alto}  & \url{https://doi.org/10.1007/3-540-45683-X_45} \\
+\hline
+[7]  & \textbf{Alto}  & \url{https://doi.org/10.1007/978-3-540-30586-6_76} \\
+\hline
+[8]  & \textbf{Alto}  & \url{https://doi.org/10.1007/978-3-540-71496-5_73} \\
+\hline
+[9]  & \textbf{Alto}  & \url{https://doi.org/10.1007/978-3-540-30549-1_43} \\
+\hline
+[10] & \textbf{Medio} & \url{https://doi.org/10.1007/11735106_17} \\
+\hline
+[11] & \textbf{Alto}  & \url{10.1016/j.eswa.2008.06.054} \\
+\hline
+[12] & \textbf{Alto}  & \url{10.1016/j.proeng.2011.08.404} \\
+\hline
+[13] & \textbf{Alto}  & \url{10.1016/j.patrec.2015.07.028} \\
+\hline
+[14] & \textbf{Alto}  & \url{10.1016/j.patrec.2008.11.013} \\
+\hline
+[15] & \textbf{Alto}  & \url{10.1016/j.knosys.2016.02.017} \\
+\hline
+[16] & \textbf{Alto}  & \url{10.1109/ISIP.2008.54} \\
+\hline
+[17] & \textbf{Alto}  & \url{10.1016/j.asoc.2020.106652} \\
+\hline
+[18] & \textbf{Medio} & \url{10.1016/j.knosys.2010.04.004} \\
+\hline
+[19] & \textbf{Alto}  & \url{10.1016/j.neucom.2018.07.002} \\
+\hline
+[20] & \textbf{Alto}  & \url{https://dl.acm.org/doi/10.5555/1619645.1619732} \\
+\hline
+[21] & \textbf{Medio} & \url{10.32604/cmes.2023.026812} \\
+\hline
+[22] & \textbf{Medio} & \url{10.55151/ijeedu.v5i1.99} \\
+\hline
+[23] & \textbf{Medio} & \url{10.62441/nano-ntp.v20iS1.77} \\
+\hline
+[24] & \textbf{Medio} & \url{10.38094/jastt61237} \\
+\hline
+[25] & \textbf{Medio} & \url{10.3390/bdcc7030127} \\
+\hline
+[26] & \textbf{Medio} & \url{10.1063/5.0110821} \\
+\hline
+[27] & \textbf{Medio} & \url{10.1016/j.fraope.2025.100373} \\
+\hline
+[28] & \textbf{Alto}  & \url{10.1007/s11634-023-00536-8} \\
+\hline
+[29] & \textbf{Medio} & \url{10.1051/e3sconf/202346502048} \\
+\hline
+[30] & \textbf{Medio} & \url{10.1109/ACCESS.2024.3487311} \\
+\hline
+[31] & \textbf{Alto}  & \url{10.26615/978-954-452-056-4_151} \\
+\hline
+[32] & \textbf{Medio} & \url{10.1088/1742-6596/1641/1/012043} \\
+\hline
+[33] & \textbf{Alto}  & \url{10.5220/0010890400003122} \\
+\hline
+[34] & \textbf{Alto}  & \url{10.1109/TKDE.2016.2522427} \\
+\hline
+[35] & \textbf{Alto}  & \url{10.3390/math9192378} \\
+\hline
+[36] & \textbf{Alto}  & \url{10.1109/TKDE.2010.160} \\
+\hline
+[37] & \textbf{Alto}  & \url{10.1007/978-3-642-41278-3_24} \\
+\hline
+[38] & \textbf{Alto}  & \url{10.1109/ACCESS.2020.2968984} \\
+\hline
+[39] & \textbf{Alto}  & \url{10.1109/TKDE.2016.2563436} \\
+\hline
+[40] & \textbf{Medio} & \url{10.1093/bioinformatics/btl350} \\
+\hline
+[41] & \textbf{Medio} & \url{10.4108/eai.12-10-2019.2296530} \\
+\hline
+[42] & \textbf{Medio} & \url{10.35940/ijeat.A1610.109119} \\
+\hline
+[43] & \textbf{Medio} & \url{10.1186/1471-2105-8-269} \\
+\hline
+[44] & \textbf{Alto}  & \url{10.4067/S0718-09342011000300004} \\
+\hline
+\end{longtable}
+
+\subsection{Jerarquización (Alto, Medio, Bajo) de los 44 artículos en Notebook}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{\detokenize{(trozos) (6.2) Capturas de pantalla (NotebookLM).png/trozo_0.png}}
+    \caption{Notebook 1}
+    \label{fig:notebook1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{\detokenize{(trozos) (6.2) Capturas de pantalla (NotebookLM).png/trozo_1.png}}
+    \caption{Notebook 2}
+    \label{fig:notebook2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{\detokenize{(trozos) (6.2) Capturas de pantalla (NotebookLM).png/trozo_2.png}}
+    \caption{Notebook 3}
+    \label{fig:notebook3}
+\end{figure}
+
+\subsection{Los 44 artículos importados en Mendeley}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{\detokenize{(6.3) Captura en Mendeley.png}}
+    \caption{Los 44 artículos importados en Mendeley}
+    \label{fig:mendeley44}
+\end{figure}
+
+\section{Preguntas de Control}
+
+\textbf{1. ¿Qué ventajas ofrecen los operadores booleanos en la búsqueda bibliográfica?}
+
+Los operadores booleanos permiten construir búsquedas más precisas y controladas. \texttt{AND} reduce el universo de resultados al exigir simultaneidad de conceptos; \texttt{OR} amplía la cobertura al incluir sinónimos, variantes ortográficas o términos relacionados; y \texttt{NOT} excluye elementos irrelevantes. Su uso mejora la pertinencia, reduce el ruido documental y facilita la recuperación sistemática de literatura académica.
+
+\textbf{2. ¿Cómo se aplican filtros de inclusión y exclusión en una búsqueda avanzada?}
+
+Los filtros de inclusión y exclusión se definen a partir de los criterios de la investigación. Primero se establece qué documentos deben formar parte del corpus, por ejemplo, artículos sobre Naive Bayes y clasificación de texto, publicados en revistas o conferencias, en ciertos idiomas o rangos temporales. Luego se excluyen trabajos fuera del tema, duplicados, documentos sin acceso al texto completo o estudios que no aportan evidencia útil para la pregunta de investigación. En bases como Scopus e IEEE Xplore, estos criterios se implementan mediante filtros por año, tipo de documento, área temática, idioma y palabras clave específicas.
+
+\section{Conclusiones}
+
+La práctica permitió aplicar de manera ordenada el proceso de búsqueda avanzada en bases de datos académicas, lo cual es fundamental para construir un marco de revisión bibliográfica sólido. El uso de operadores booleanos y filtros de recuperación facilitó la identificación de artículos relevantes sobre Naive Bayes y clasificación de texto, diferenciando con claridad aquellos estudios de alta relevancia de los de aplicación contextual. Asimismo, la exportación de referencias a Mendeley contribuyó a organizar la información de forma eficiente y a mantener trazabilidad en el proceso de investigación.
+
+\section{Recomendaciones}
+
+Se recomienda elaborar previamente una lista de sinónimos y términos equivalentes en inglés y español antes de ejecutar cualquier búsqueda en bases académicas. También conviene documentar cada cadena utilizada, junto con los filtros aplicados, para facilitar la replicabilidad del proceso. Además, es importante revisar manualmente las referencias exportadas al gestor bibliográfico para eliminar duplicados y corregir metadatos incompletos. Finalmente, se sugiere clasificar los artículos por nivel de relevancia desde el inicio para optimizar el análisis posterior del estado del arte.
+
+\section{Bibliografía / Referencias}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}
+
+\section{Anexos}
+Recursos de apoyo para cada una de las secciones anteriores: capturas de pantalla de Scopus e IEEE Xplore, exportación de referencias a Mendeley o Zotero, y evidencia de la clasificación de los 44 artículos.
+
+\end{document}

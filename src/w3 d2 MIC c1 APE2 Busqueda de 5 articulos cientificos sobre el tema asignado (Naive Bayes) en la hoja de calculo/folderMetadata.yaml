@@ -1,0 +1,13 @@
+asignatura: MIC
+week: 3
+day: 2
+academicClass: 1
+activity:
+  type: APE
+  number: 2
+topic: Clasificación y análisis de artículos científicos y proyectos de investigación según su tipo y área de aplicación, utilizando una guía metodológica y presentando los resultados en un reporte técnico en LaTeX.
+date: 2026-04-21
+type: academic activity
+link: "https://eva.unl.edu.ec/mod/assign/view.php?id=4378061&action=editsubmission"
+overleaft: "https://es.overleaf.com/project/69e8532b34d3e95c60b6a50a"
+state: done

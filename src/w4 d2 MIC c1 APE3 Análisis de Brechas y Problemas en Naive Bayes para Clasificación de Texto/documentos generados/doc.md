@@ -1,0 +1,30 @@
+Como asistente de investigación académica, he sistematizado las brechas y limitaciones identificadas en los artículos proporcionados sobre la efectividad de Naive Bayes en la clasificación de texto. A continuación se presenta el análisis detallado utilizando el formato de citación IEEE.
+
+### Análisis de Brechas y Problemas en Naive Bayes para Clasificación de Texto
+
+| # | Tipo | Descripción | Evidencia textual | Fuente | Implicancia |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | **Limitación técnica** | Se identifica un fallo crítico en el proceso de estimación de parámetros de Naive Bayes cuando se aplica a lenguaje natural, lo que genera resultados decepcionantes comparados con otras tareas de minería de datos. | "...found a serious problem in the parameter estimation process, which causes poor results in text classification domain". | | Sugiere que el modelo estándar requiere heurísticas de normalización para ser competitivo frente a modelos complejos como SVM. |
+| 2 | **Brecha de conocimiento** | Las investigaciones previas sobre ponderación de características han sido incompletas, ya que solo integran los pesos en la fórmula de clasificación final y omiten las estimaciones de probabilidad condicional. | "...all of the existing feature weighting approaches only incorporate the learned feature weights into the classification of formula... and do not incorporate the learned feature weights into its conditional probability estimates at all". | | Indica que la precisión del modelo podría mejorar significativamente mediante un pesado de características profundo en el entrenamiento. |
+| 3 | **Problema práctico/aplicado** | El clasificador Multinomial Naive Bayes (MNB) presenta deficiencias de rendimiento sustanciales cuando se enfrenta a conjuntos de datos donde las clases no están equilibradas. | "...combat a potential problem with the application of MNB to unbalanced datasets. We propose an appropriate correction by adjusting attribute priors". | | Establece que la efectividad de NB depende de la distribución de los datos y requiere correcciones específicas de *priors* en contextos reales. |
+| 4 | **Brecha de conocimiento** | Existe una falta de investigación sobre la clasificación multiclase de textos cortos (requerimientos funcionales) utilizando conjuntos de datos pequeños en dominios especializados como la contabilidad. | "There is no research on multi-classification of functional requirements with a small dataset particularly for an accounting field". | | [Inferencia] La efectividad de NB en nichos técnicos está poco explorada y podría depender de la integración con ontologías para compensar la falta de datos. |
+| 5 | **Necesidad metodológica** | Los métodos estadísticos tradicionales (frecuentistas) para comparar clasificadores de texto son insuficientes, pues no pueden aceptar la hipótesis nula ni manejar correctamente métricas como F1. | "...such a frequentist approach has a number of inherent deficiencies and limitations, e.g., the inability to accept the null hypothesis... the difficulty to compare commonly-used multivariate performance measures like F1 scores". | | La falta de rigor estadístico en las comparaciones previas podría estar nublando la comprensión real de qué tan "efectivo" es un clasificador frente a otro. |
+| 6 | **Limitación técnica** | Los modelos actuales para evaluar puntajes F1 fallan al no considerar la correlación entre los clasificadores durante la comparación, lo que reduce el poder estadístico de los resultados. | "In contrast to the existing probabilistic model for F1 scores which is unpaired, our proposed model takes the correlation between classifiers into account". | | [Inferencia] Muchas afirmaciones sobre la superioridad de otros modelos sobre NB podrían basarse en evaluaciones con bajo poder estadístico. |
+
+### Síntesis de brechas dominantes
+
+El análisis de las fuentes revela tres problemas críticos. En primer lugar, existe una **deficiencia en la estimación de parámetros y el manejo de pesos**, donde se observa que omitir la ponderación en las probabilidades condicionales limita el rendimiento del modelo,. En segundo lugar, se detecta una **vulnerabilidad estructural ante la escasez y el desequilibrio de datos**, especialmente en textos cortos o dominios especializados, lo que requiere intervenciones externas como ontologías o ajustes de *priors*,. Finalmente, emerge una **crisis metodológica en la evaluación**, donde los autores coinciden en que las pruebas estadísticas tradicionales no son lo suficientemente robustas para certificar la efectividad real de Naive Bayes frente a sus competidores en métricas multivariadas como F1.
+
+***
+
+### Referencias Bibliográficas (IEEE)
+
+ S. B. Kim, K. S. Han, H. C. Rim, and S. H. Myaeng, “Some effective techniques for naive bayes text classification,” *IEEE Transactions on Knowledge and Data Engineering*, vol. 18, no. 11, pp. 1457–1466, Nov. 2006.
+
+ K. Sangounpao and P. Muenchaisri, “Ontology-Based Naive Bayes Short Text Classification Method for a Small Dataset,” in *Proc. 20th IEEE/ACIS International Conference on Software Engineering, Artificial Intelligence, Networking and Parallel/Distributed Computing (SNPD)*, Jul. 2019, pp. 53–58.
+
+ E. Frank and R. R. Bouckaert, “Naive Bayes for Text Classification with Unbalanced Classes,” in *Lecture Notes in Computer Science*, vol. 4213, pp. 503–510, 2006.
+
+ D. Zhang, J. Wang, E. Yilmaz, X. Wang, and Y. Zhou, “Bayesian performance comparison of text classifiers,” in *SIGIR 2016 - Proceedings of the 39th International ACM SIGIR Conference on Research and Development in Information Retrieval*, Jul. 2016, pp. 15–24.
+
+ L. Jiang, C. Li, S. Wang, and L. Zhang, “Deep feature weighting for naive Bayes and its application to text classification,” *Engineering Applications of Artificial Intelligence*, vol. 52, pp. 26–39, Jun. 2016.

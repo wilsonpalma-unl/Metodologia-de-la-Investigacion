@@ -1,0 +1,148 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{helvet}
+\usepackage{ragged2e}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+\renewcommand{\familydefault}{\sfdefault}
+\geometry{
+  a4paper,
+  left=3.0cm,
+  right=3.0cm,
+  top=2.35cm,
+  bottom=2.35cm,
+  headheight=1.9cm,
+  headsep=0.45cm
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.22em}
+\setlength{\tabcolsep}{6pt}
+\renewcommand{\arraystretch}{1.08}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=1.35cm]{reporte_tecnico_overleaf_logo.png}}
+\fancyhead[R]{\vspace{0.1cm}\small FEIRNNR - Carrera de Computación}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\makeatletter
+\renewcommand{\headrule}{%
+  {\color{gray!65}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}%
+}
+\makeatother
+
+\titleformat{\section}
+  {\bfseries\fontsize{15}{17}\selectfont}
+  {\thesection.}{0.8em}{}
+\titlespacing*{\section}{0pt}{0.7ex}{0.2ex}
+
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\RaggedRight\arraybackslash}X}
+
+\begin{document}
+\thispagestyle{fancy}
+
+\vspace*{0.15cm}
+
+\begin{center}
+{\bfseries\fontsize{23}{26}\selectfont
+Reporte Técnico de Actividades\\
+Práctico-Experimentales Nro. 006\par}
+\end{center}
+
+\section{Datos de Identificación del Estudiante y la Práctica}
+
+\noindent
+\begin{tabularx}{\textwidth}{|L{0.43\textwidth}|Y|}
+\hline
+\textbf{Nombre del estudiante(s)} & Wilson Patricio Palma Samaniego \\ \hline
+\textbf{Asignatura} & Metodología de la Investigación en Computación \\ \hline
+\textbf{Ciclo} & 4 A \\ \hline
+\textbf{Unidad} & 1 \\ \hline
+\textbf{Resultado de aprendizaje de la unidad} & R1. Contrasta la investigación y sus tipos con los métodos en el área de Computación y afines. \\ \hline
+\textbf{Práctica Nro.} & 006 \\ \hline
+\textbf{Título de la Práctica} & Búsqueda avanzada y exportación de referencias \\ \hline
+\textbf{Nombre del Docente} & Luis Antonio Chamba Eras \\ \hline
+\textbf{Fecha} & Martes 19 de mayo de 2026 \\ \hline
+\textbf{Horario} & 10h30 -- 11h30 \\ \hline
+\textbf{Lugar} & EVA-Moodle / Aula \\ \hline
+\textbf{Tiempo planificado en el Sílabo} & 1 hora \\ \hline
+\end{tabularx}
+
+\section{Objetivo(s) de la Práctica}
+Diseñar y ejecutar cadenas de búsqueda avanzada en Scopus e IEEE Xplore, exportando las referencias al gestor bibliográfico.
+
+\section{Materiales, Reactivos, Equipos y Herramientas}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Computador.
+    \item Acceso a Scopus.
+    \item Acceso a IEEE Xplore.
+    \item Mendeley o Zotero.
+    \item Guía de operadores booleanos.
+    \item EVA-Moodle.
+    \item Guía institucional de práctica.
+\end{itemize}
+
+\section{Procedimiento / Metodología Ejecutada}
+La práctica se desarrolló siguiendo el enfoque de Aprendizaje Basado en Investigación (ABI), con los siguientes pasos:
+
+\begin{enumerate}[leftmargin=1.2cm]
+    \item Se definieron las palabras clave del proyecto en inglés y español, con el fin de ampliar la cobertura de búsqueda.
+    \item Se construyeron cadenas de búsqueda utilizando operadores booleanos como AND, OR y NOT.
+    \item Se ejecutaron búsquedas avanzadas en Scopus e IEEE Xplore aplicando filtros de año, tipo de documento y área temática.
+    \item Se evaluaron los resultados obtenidos y se seleccionaron artículos adicionales relevantes para el proyecto.
+    \item Se exportaron las referencias seleccionadas directamente a Mendeley o Zotero.
+    \item Se documentó la cadena de búsqueda empleada y los resultados obtenidos durante la exploración bibliográfica.
+    \item Finalmente, se subió el reporte técnico en formato PDF a EVA-Moodle.
+\end{enumerate}
+
+\section{Resultados}
+Como resultado de la práctica, se obtuvo una cadena de búsqueda avanzada documentada para el tema de investigación, junto con referencias bibliográficas exportadas al gestor Mendeley o Zotero. Además, se generaron capturas de pantalla de los resultados obtenidos en Scopus e IEEE Xplore, evidenciando el uso correcto de filtros y operadores booleanos.
+
+\begin{itemize}[leftmargin=1.2cm]
+    \item Cadena de búsqueda documentada.
+    \item Referencias exportadas a Mendeley/Zotero.
+    \item Capturas de pantalla de los resultados de búsqueda.
+    \item Selección de artículos adicionales relevantes para el proyecto.
+\end{itemize}
+
+\section{Preguntas de Control}
+\textbf{1. ¿Qué ventajas ofrecen los operadores booleanos en la búsqueda bibliográfica?}
+
+Los operadores booleanos permiten combinar términos de búsqueda de manera precisa y flexible. AND ayuda a restringir los resultados al exigir la presencia de varios términos; OR amplía la búsqueda incluyendo sinónimos o variantes; y NOT excluye términos no deseados. Esto mejora la pertinencia y reduce el ruido en los resultados.
+
+\textbf{2. ¿Cómo se aplican filtros de inclusión y exclusión en una búsqueda avanzada?}
+
+Los filtros de inclusión y exclusión se aplican definiendo criterios previos sobre qué documentos deben considerarse y cuáles deben descartarse. En una búsqueda avanzada, esto se realiza mediante filtros por año, tipo de documento, área temática, idioma o palabras clave. También puede excluirse información irrelevante usando NOT o restringiendo resultados a revistas, conferencias o disciplinas específicas.
+
+\section{Conclusiones}
+La práctica permitió comprender la importancia de las búsquedas avanzadas en bases de datos académicas para la construcción de un marco teórico sólido. El uso adecuado de operadores booleanos y filtros de búsqueda facilita la identificación de literatura relevante y mejora la organización de referencias bibliográficas. Asimismo, la exportación directa a un gestor bibliográfico agiliza el proceso de sistematización de fuentes para investigaciones académicas.
+
+\section{Recomendaciones}
+Se recomienda definir previamente las palabras clave del proyecto en ambos idiomas para obtener mejores resultados. También es conveniente revisar varias combinaciones de búsqueda antes de exportar referencias, con el fin de evitar duplicados o documentos poco relevantes. Finalmente, se sugiere mantener organizada la biblioteca bibliográfica en Mendeley o Zotero desde el inicio del proceso investigativo.
+
+\section{Bibliografía / Referencias}
+K. Petersen et al., ``Guidelines for conducting systematic mapping studies in software engineering,'' \textit{IST}, vol. 64, 2015.
+
+\section{Anexos}
+\begin{itemize}[leftmargin=1.2cm]
+    \item Capturas de pantalla de las búsquedas realizadas en Scopus.
+    \item Capturas de pantalla de las búsquedas realizadas en IEEE Xplore.
+    \item Evidencia de exportación de referencias a Mendeley o Zotero.
+    \item Cadena de búsqueda avanzada utilizada en la práctica.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,6 @@
+> Nota: con solo los DOI puedo verificar con seguridad el año y que pertenecen a IEEE Xplore, pero no puedo completar de forma confiable título, metodología, dataset o resultados sin abrir los artículos. Por eso dejo esos campos como “por verificar”.
+
+| # | Referencia (IEEE) | Año | Base de datos | Técnica IA | Problema abordado | Objetivo del artículo | Metodología | Dataset / Contexto | Resultados principales | Limitaciones | Aporte para la PI |
+|---|---|---:|---|---|---|---|---|---|---|---|---|
+| 2 | Artículo IEEE Access, DOI: 10.1109/ACCESS.2020.2968984 | 2020 | IEEE Xplore | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Sirve como evidencia reciente sobre el uso de Naive Bayes en clasificación de texto, a confirmar con el contenido del artículo |
+| 3 | Artículo IEEE Access, DOI: 10.1109/ACCESS.2024.3453912 | 2024 | IEEE Xplore | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Por verificar | Sirve como evidencia reciente sobre el uso de Naive Bayes en clasificación de texto, a confirmar con el contenido del artículo |

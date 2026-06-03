@@ -1,0 +1,271 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CAPÍTULO 04: NAIVE BAYES
+% AUTOR: Wilson Patricio Palma Samaniego
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Evaluación de la Efectividad del Algoritmo Naive Bayes en la Clasificación de Textos}
+\label{cap:capitulo_04}
+
+\textbf{Autor:} Wilson Patricio Palma Samaniego (wilson.palma@unl.edu.ec) \\
+\textbf{Técnica asignada:} Naive Bayes \\
+
+\section{Introducción}
+
+En el contexto del libro, este capítulo se ubica dentro del eje temático \textit{Aprendizaje Estadístico y Modelos de Clasificación/Regresión}, con un enfoque netamente técnico orientado a la evaluación de un clasificador probabilístico clásico. La pregunta que guía el desarrollo es concreta y delimitada: \textit{¿Qué tan efectivo es Naive Bayes en clasificación de texto?}. Esta cuestión resulta especialmente pertinente porque la clasificación textual constituye uno de los problemas más representativos de la minería de textos y del procesamiento de lenguaje natural, dos áreas donde la eficiencia computacional, la interpretabilidad y la robustez del modelo son tan importantes como su precisión predictiva.
+
+Naive Bayes se ha mantenido como un algoritmo de referencia en tareas de clasificación supervisada por su simplicidad, su bajo costo computacional y su facilidad de implementación. Aun así, la literatura muestra que su desempeño no depende únicamente del algoritmo base, sino también de la representación de los datos, del balance de clases, del tamaño del corpus, del ruido léxico y de las técnicas de mejora que se incorporen al flujo de trabajo \cite{Kim2006,Frank2006,Kibriya2005}. Por ello, más que preguntar si Naive Bayes \textit{sirve} o \textit{no sirve}, la pregunta técnicamente más útil es en qué condiciones su desempeño es competitivo y qué mecanismos permiten fortalecerlo \cite{Jiang2016,10.1145/2911451.2911547}.
+
+Este capítulo analiza esa cuestión desde tres ángulos complementarios. Primero, desarrolla los fundamentos teóricos necesarios para comprender el funcionamiento del clasificador. Segundo, presenta la metodología de revisión y jerarquización de la evidencia bibliográfica utilizada para el proyecto. Tercero, sintetiza el análisis de la literatura y responde la pregunta de investigación a partir de los patrones observados en los estudios seleccionados. El objetivo no es solo describir el algoritmo, sino valorar su efectividad como solución técnica para clasificación textual en escenarios reales y académicos.
+
+![Esquema conceptual de la evaluación de Naive Bayes en clasificación de textos.](figuras/esquema_evaluacion_naive_bayes.png)
+
+\section{Fundamentos teóricos}
+
+\subsection{Clasificación de textos y representación documental}
+
+La clasificación de textos es una tarea de aprendizaje supervisado en la que un documento $d$ debe asignarse a una clase $c$ perteneciente a un conjunto finito $C$. En escenarios prácticos, el documento suele representarse mediante un vector de características derivado de su contenido léxico. La forma más común de representación es el modelo \textit{bag of words}, en el que el orden de las palabras se ignora y cada término aporta evidencia sobre la pertenencia del documento a una clase concreta.
+
+Esta representación, aunque simplificada, es muy útil en clasificación textual porque convierte un problema de lenguaje natural en un problema numérico apto para modelos estadísticos. Sin embargo, también genera alta dimensionalidad, esparsidad y redundancia léxica. Por ello, la literatura sobre Naive Bayes en texto se ha concentrado en técnicas de selección y ponderación de características, así como en mecanismos para mejorar la estimación de probabilidades condicionales \cite{CHEN20095432,YOUN2009477,ZHANG2016137,Tang20162508}.
+
+Desde el punto de vista técnico, la clasificación textual suele enfrentar cuatro condiciones que afectan la precisión del modelo: vocabularios extensos, documentos muy breves, clases desbalanceadas y variabilidad semántica. Naive Bayes ofrece una respuesta atractiva a ese problema porque calcula probabilidades de pertenencia sin requerir procedimientos de optimización complejos. No obstante, su supuesto de independencia condicional entre atributos es una simplificación fuerte que puede limitar su rendimiento cuando los términos del documento presentan correlaciones semánticas o sintácticas significativas \cite{Ganiz20111022,Gan2021}.
+
+\subsection{Teorema de Bayes y regla de decisión}
+
+Naive Bayes se basa en el teorema de Bayes, una regla fundamental de la inferencia probabilística. Para una clase $c$ y un documento $d$, la probabilidad posterior se expresa como:
+
+\begin{equation}
+P(c \mid d) = \frac{P(c)\,P(d \mid c)}{P(d)}
+\label{eq:bayes}
+\end{equation}
+
+En clasificación, el denominador $P(d)$ es constante para todas las clases, por lo que la decisión se toma maximizando el numerador. La regla de decisión se escribe como:
+
+\begin{equation}
+\hat{c} = \arg\max_{c \in C} P(c)\,P(d \mid c)
+\label{eq:decision}
+\end{equation}
+
+Cuando el documento se representa como un conjunto de palabras $\{w_1, w_2, \dots, w_n\}$ y se asume independencia condicional entre ellas, el producto de probabilidades condicionales toma la forma:
+
+\begin{equation}
+\hat{c} = \arg\max_{c \in C} P(c)\prod_{i=1}^{n}P(w_i \mid c)
+\label{eq:naive}
+\end{equation}
+
+La independencia condicional es la suposición que da nombre al algoritmo. En rigor, el supuesto rara vez se cumple en lenguaje natural, pero el modelo sigue siendo útil porque la simplificación reduce drásticamente el número de parámetros a estimar y hace viable su aplicación en corpora grandes o medianos \cite{Kibriya2005,Frank2006}. En otras palabras, Naive Bayes no busca modelar la estructura lingüística completa de un texto, sino capturar suficiente evidencia estadística para tomar decisiones útiles.
+
+Para evitar problemas de subflujo numérico y facilitar el cálculo, la expresión anterior suele transformarse a escala logarítmica:
+
+\begin{equation}
+\hat{c} = \arg\max_{c \in C} \left[\log P(c) + \sum_{i=1}^{n}\log P(w_i \mid c)\right]
+\label{eq:logdecision}
+\end{equation}
+
+Esta forma permite trabajar con sumas en lugar de productos y resulta más estable desde el punto de vista computacional. En clasificación de textos, la decisión final depende de la clase con mayor puntuación posterior, lo que convierte al algoritmo en un clasificador generativo de implementación directa.
+
+\subsection{Modelo multinomial, suavizado y estimación de parámetros}
+
+La variante más utilizada en clasificación textual es el modelo multinomial, en el que las frecuencias de las palabras dentro de cada clase se emplean para estimar probabilidades. Si $N_{w,c}$ representa el número de veces que la palabra $w$ aparece en documentos de la clase $c$, y $N_c$ el total de palabras observadas en esa clase, la estimación básica es:
+
+\begin{equation}
+P(w \mid c) = \frac{N_{w,c}}{N_c}
+\label{eq:mnb_basic}
+\end{equation}
+
+El problema aparece cuando una palabra no se observa en el conjunto de entrenamiento para una clase específica, lo cual haría que la probabilidad condicional sea cero y anule completamente el producto de la ecuación \eqref{eq:naive}. Para resolverlo, se aplica suavizado, normalmente Laplace o alguna variante afín, de modo que:
+
+\begin{equation}
+P(w \mid c) = \frac{N_{w,c} + \alpha}{N_c + \alpha |V|}
+\label{eq:smoothing}
+\end{equation}
+
+donde $|V|$ representa el tamaño del vocabulario y $\alpha$ es el parámetro de suavizado. Este mecanismo mejora la estabilidad de la estimación, especialmente cuando el corpus es pequeño o el vocabulario es muy amplio \cite{10.1007/978-3-540-71496-5_73}. En los estudios revisados, el suavizado aparece como una de las correcciones más sencillas y efectivas para hacer más robusto al clasificador.
+
+La estimación de la probabilidad a priori $P(c)$ también es relevante, porque refleja la frecuencia relativa de cada clase en el conjunto de entrenamiento. Cuando existe desbalance, esta probabilidad puede sesgar fuertemente la predicción hacia las clases mayoritarias. Frank y Bouckaert muestran que ajustar los priors y corregir el tratamiento del desbalance mejora de manera importante el comportamiento de Naive Bayes en clasificación documental \cite{Frank2006}. En consecuencia, el rendimiento del algoritmo depende tanto del modelo de evidencia como de la calidad de las probabilidades previas.
+
+\subsection{Métricas para evaluar efectividad}
+
+Hablar de efectividad en clasificación textual implica considerar varias dimensiones al mismo tiempo. Una sola métrica no basta para describir el comportamiento del modelo. En esta investigación, la efectividad se interpreta de forma integrada a partir de precisión, recall, F1 y costo computacional. En términos de clasificación binaria, las métricas básicas son:
+
+\begin{equation}
+\text{Precisión} = \frac{TP}{TP+FP}
+\label{eq:precision}
+\end{equation}
+
+\begin{equation}
+\text{Recall} = \frac{TP}{TP+FN}
+\label{eq:recall}
+\end{equation}
+
+\begin{equation}
+F1 = \frac{2 \cdot \text{Precisión} \cdot \text{Recall}}{\text{Precisión} + \text{Recall}}
+\label{eq:f1}
+\end{equation}
+
+La precisión indica cuántas de las predicciones positivas fueron correctas; el recall mide cuántos positivos reales fueron recuperados; y el F1 resume ambos aspectos en una sola medida. Aunque en clasificación multiclase se utilizan variantes macro y micro, la lógica es la misma: una técnica es más efectiva si consigue equilibrio entre acierto, cobertura y estabilidad.
+
+En la literatura sobre Naive Bayes, la comparación con otros clasificadores ha demostrado que el análisis debe ser más amplio que la simple exactitud global. Zhang et al. proponen una comparación bayesiana de clasificadores de texto para evitar las limitaciones de las pruebas frecuentistas tradicionales y capturar de forma más realista la incertidumbre de los resultados \cite{10.1145/2911451.2911547}. Esto es importante porque la \textit{efectividad} de un clasificador no se reduce a un número aislado; también incluye robustez, interpretabilidad, costo de entrenamiento y sensibilidad al contexto.
+
+\subsection{Variantes y mejoras del algoritmo}
+
+El análisis de la literatura muestra que el Naive Bayes clásico suele mejorarse mediante cuatro líneas técnicas principales: selección de características, ponderación de atributos, relajación del supuesto de independencia y adaptación al dominio semántico o al cambio de distribución.
+
+La primera línea de mejora es la selección de características. En textos, el vocabulario suele ser muy amplio y gran parte de los términos aporta poca discriminación. Chen et al. proponen métricas específicas de evaluación de rasgos para Naive Bayes, mientras que Youn y Jeong introducen un esquema de \textit{class dependent feature scaling} que incrementa la capacidad de discriminación del modelo \cite{CHEN20095432,YOUN2009477}. De modo semejante, Tang, Kay y He muestran que la selección óptima de características puede mejorar significativamente la clasificación con Naive Bayes sin sacrificar su simplicidad \cite{Tang20162508}.
+
+La segunda línea es la ponderación de características. Kim et al. muestran que la normalización por documento y el \textit{feature weighting} permiten que Naive Bayes compita con métodos más complejos en clasificación textual \cite{Kim2006}. Jiang et al. van más allá al proponer una ponderación profunda de características que mejora el modelo base en múltiples conjuntos de datos \cite{Jiang2016}. En una dirección similar, Zhang et al. presentan dos enfoques de ponderación que mantienen el bajo costo computacional y elevan la precisión \cite{ZHANG2016137}. Estas propuestas son especialmente relevantes porque resuelven una debilidad conocida del modelo: su tratamiento uniforme de las palabras dentro de una clase.
+
+La tercera línea es la relajación del supuesto de independencia condicional. Ganiz et al. proponen un Naive Bayes de orden superior, no IID, capaz de capturar dependencias que el modelo clásico ignora \cite{Ganiz20111022}. Ding et al. desarrollan un clasificador bayesiano combinado que también busca mejorar la exactitud cuando las variables están fuertemente correlacionadas \cite{4554061}. Más recientemente, Gan et al. adaptan \textit{hidden naive Bayes} para texto, y El Hindi et al. proponen algoritmos de \textit{lazy fine-tuning} para mejorar el desempeño en clasificación textual \cite{Gan2021,ELHINDI2020106652}. Estos trabajos muestran que el modelo sigue evolucionando sin perder su esencia probabilística.
+
+La cuarta línea es la adaptación al dominio semántico o al cambio de distribución. Kim et al. integran información basada en Wikipedia para construir un Naive Bayes semántico con alta efectividad en corpora de referencia \cite{KIM2018128}. En otro contexto, Dai et al. desarrollan un enfoque de transferencia de conocimiento entre dominios con Naive Bayes para cuando los datos de entrenamiento y prueba no siguen la misma distribución \cite{10.5555/1619645.1619732}. Ambas propuestas confirman que Naive Bayes no es un algoritmo estático; puede ampliarse para responder mejor a condiciones complejas y heterogéneas.
+
+La tabla siguiente resume, desde una perspectiva técnica, las principales dimensiones que aparecen reiteradamente en la literatura revisada.
+
+\begin{table}[H]
+\centering
+\caption{Dimensiones técnicas de la efectividad de Naive Bayes en clasificación de textos}
+\label{tab:dimensiones}
+\small
+\begin{tabularx}{\textwidth}{|L{3.1cm}|X|X|}
+\hline
+\textbf{Dimensión} & \textbf{Hallazgo recurrente en la literatura} & \textbf{Implicación técnica} \\ \hline
+Precisión & Mejora cuando se combinan selección y ponderación de características \cite{Kim2006,Jiang2016,ZHANG2016137}. & Aumenta la capacidad discriminativa del modelo. \\ \hline
+Robustez & Funciona bien en textos cortos, corpus pequeños y dominios específicos \cite{Sangounpao2019,Awotunde2023131,Pratmanto2020}. & Es útil en escenarios reales con datos limitados. \\ \hline
+Adaptabilidad & Variantes como higher-order NB, hidden NB y semantic NB extienden el modelo base \cite{Ganiz20111022,Gan2021,KIM2018128}. & El algoritmo puede adaptarse a contextos más complejos. \\ \hline
+Estabilidad & El suavizado y el ajuste de priors reducen errores de estimación \cite{Frank2006,10.1007/978-3-540-71496-5_73}. & Evita probabilidades nulas y sesgo por clases. \\ \hline
+Interpretabilidad & Su formulación probabilística es clara y directa \cite{Kim2006,Frank2006}. & Facilita su explicación y uso académico. \\ \hline
+Costo computacional & Mantiene baja complejidad de entrenamiento y predicción \cite{Jiang2016,CHEN20095432}. & Es viable para sistemas con recursos limitados. \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Espacio reservado para la figura}}
+\caption{Estructura conceptual del clasificador Naive Bayes aplicado a documentos de texto.}
+\label{fig:estructura_nb}
+\end{figure}
+
+\section{Metodología y análisis de la literatura}
+
+\subsection{Estrategia metodológica general}
+
+La metodología seguida para este capítulo se apoyó en la lógica general de trabajo usada durante toda la asignatura. Primero, la pregunta de investigación se descompuso en palabras clave principales y términos asociados. Después, se construyeron cadenas de búsqueda con operadores lógicos para recuperar estudios en bases como IEEE Xplore y ACM Digital Library. El primer corte produjo una matriz inicial de cinco artículos científicos, lo que permitió empezar la extracción y la lectura analítica de manera controlada.
+
+Posteriormente, la búsqueda se amplió a fuentes como ScienceDirect, Springer y Lens para reunir un corpus de veinte referencias sólidas y luego, en una fase de mayor refinamiento, se utilizó Scopus para obtener metadatos y consolidar una base de cuarenta y cuatro artículos relacionados con la pregunta de investigación. En ese proceso se usaron Mendeley o Zotero para la gestión bibliográfica, Overleaf para la escritura en LaTeX y NotebookLM para jerarquizar y organizar la información extraída. Esta secuencia metodológica no solo permitió localizar literatura, sino también clasificarla, compararla y convertirla en evidencia argumentativa para responder la pregunta planteada.
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Espacio reservado para la figura}}
+\caption{Flujo metodológico general seguido para la búsqueda, selección y análisis de la literatura.}
+\label{fig:flujo_metodologico}
+\end{figure}
+
+La lógica de selección de la literatura se basó en dos criterios centrales: relevancia temática y aporte técnico. La relevancia temática se definió por la relación directa del artículo con Naive Bayes y clasificación textual; el aporte técnico, por su capacidad para explicar, mejorar o comparar el comportamiento del algoritmo. Bajo esa lógica, los trabajos que estudian técnicas de selección de rasgos, ponderación, suavizado, adaptación semántica o relajación del supuesto de independencia fueron considerados más útiles que aquellos centrados únicamente en aplicaciones muy específicas sin discusión metodológica profunda.
+
+\begin{table}[H]
+\centering
+\caption{Criterios de inclusión y exclusión empleados en el análisis bibliográfico}
+\label{tab:criterios}
+\small
+\begin{tabularx}{\textwidth}{|L{3.2cm}|X|X|}
+\hline
+\textbf{Criterio} & \textbf{Inclusión} & \textbf{Exclusión} \\ \hline
+Relación con el tema & Estudios centrados en Naive Bayes, clasificación de texto o variantes del modelo. & Trabajos sin vínculo directo con clasificación textual o sin referencia al algoritmo. \\ \hline
+Aporte técnico & Artículos que mejoran, comparan o adaptan el clasificador. & Estudios meramente descriptivos sin aporte metodológico claro. \\ \hline
+Tipo de evidencia & Experimentos, métricas de clasificación, análisis comparativo, validación cruzada. & Opiniones no justificadas o textos sin metodología explícita. \\ \hline
+Utilidad para la pregunta & Fuentes que ayudan a responder qué tan efectivo es Naive Bayes en texto. & Fuentes que no permiten extraer conclusiones sobre desempeño. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Estructura de la evidencia recuperada}
+
+La revisión bibliográfica mostró una evolución ordenada en varias etapas: búsqueda inicial de cinco artículos, análisis de brechas, clasificación de enfoques, mapa conceptual, formulación de objetivos, ampliación a veinte fuentes y, finalmente, recuperación de cuarenta y cuatro artículos con metadatos completos. Esta secuencia es importante porque demuestra trazabilidad y madurez progresiva del proyecto. No se trató de acumular referencias de manera indiscriminada, sino de construir un corpus cada vez más preciso y útil.
+
+\begin{table}[H]
+\centering
+\caption{Síntesis de las etapas de construcción del corpus bibliográfico}
+\label{tab:etapas}
+\small
+\begin{tabularx}{\textwidth}{|L{2.3cm}|L{2.8cm}|X|}
+\hline
+\textbf{Etapa} & \textbf{Producto} & \textbf{Propósito} \\ \hline
+APE2 & Matriz de cinco artículos & Obtener evidencia preliminar sobre la efectividad del algoritmo. \\ \hline
+APE3 & Análisis de brechas & Identificar limitaciones, vacíos y problemas recurrentes. \\ \hline
+ACD3 & Tabla de enfoques & Verificar el tipo de investigación predominante en la literatura. \\ \hline
+AA3 & Mapa conceptual & Delimitar problema, contexto, actores y objetivos. \\ \hline
+APE4 & Pregunta y objetivos & Traducir la brecha en una ruta de investigación clara. \\ \hline
+APE5 & Veinte fuentes & Consolidar antecedentes y ampliar el estado del arte. \\ \hline
+APE6 & Cuarenta y cuatro artículos y BibTeX & Organizar la base documental final para el análisis técnico. \\ \hline
+AA6 & Antecedentes iniciales & Sintetizar la evidencia en una narrativa académica coherente. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Análisis temático de la literatura}
+
+Al analizar las cuarenta y cuatro fuentes reunidas, la evidencia se agrupa en cinco grandes ejes: mejoras al modelo base, selección y ponderación de características, variantes no IID o de orden superior, adaptación semántica o por transferencia, y aplicaciones en dominios específicos. Esa organización permite ver que la efectividad de Naive Bayes no es uniforme, sino dependiente del tipo de problema textual.
+
+\paragraph{1. Mejoras al modelo base}
+
+Los estudios más tempranos muestran que el Naive Bayes multinomial puede mejorar notablemente si se corrigen sus problemas de estimación. Kim et al. proponen normalización por documento y ponderación de características, obteniendo resultados comparables a clasificadores más complejos \cite{Kim2006}. De forma similar, Kibriya et al. revisan el desempeño del modelo multinomial y señalan que TF-IDF y la normalización son componentes importantes para elevar su rendimiento \cite{10.1007/978-3-540-30549-1_43}. En esta misma línea, Schneider enfatiza que el bajo desempeño de Naive Bayes no se debe a una falla total del método, sino a una modelación incompleta del texto y a una selección inadecuada de atributos \cite{10.1007/978-3-540-30586-6_76}.
+
+\paragraph{2. Selección y ponderación de características}
+
+La literatura es consistente al señalar que la selección de rasgos es uno de los factores más importantes para la efectividad del algoritmo. Chen et al. proponen medidas específicas para seleccionar características relevantes en textos multiclase \cite{CHEN20095432}. Youn y Jeong presentan una técnica de escalado dependiente de la clase que mejora la capacidad del clasificador para distinguir entre categorías \cite{YOUN2009477}. Tang, Kay y He muestran, además, que acercarse a una selección óptima puede traducirse en mejoras sustanciales de desempeño sin comprometer la simplicidad del modelo \cite{Tang20162508}. A esto se suman Jiang et al., quienes incorporan \textit{deep feature weighting}, y Zhang et al., que diseñan dos estrategias de ponderación con beneficios concretos en precisión \cite{Jiang2016,ZHANG2016137}.
+
+\paragraph{3. Variantes no IID y modelos extendidos}
+
+Una de las limitaciones más conocidas del modelo clásico es su supuesto de independencia condicional. Cuando las palabras están correlacionadas, la hipótesis naive se vuelve demasiado restrictiva. Ganiz et al. responden a este problema proponiendo un Naive Bayes de orden superior que modela dependencias entre atributos \cite{Ganiz20111022}. Ding et al. también presentan un clasificador bayesiano novedoso que busca relajaciones funcionales de ese supuesto \cite{4554061}. Más recientemente, Gan et al. adaptan \textit{hidden naive Bayes} para texto y El Hindi et al. proponen un mecanismo de \textit{lazy fine-tuning} para mejorar el desempeño local del modelo \cite{Gan2021,ELHINDI2020106652}. Estas contribuciones demuestran que Naive Bayes sigue siendo una plataforma fértil para el desarrollo de variantes técnicas.
+
+\paragraph{4. Adaptación semántica y transferencia entre dominios}
+
+Otra línea de evolución importante consiste en incorporar información semántica o de dominio. Kim et al. utilizan conceptos asociados a Wikipedia para enriquecer la representación documental y mejorar el clasificador \cite{KIM2018128}. Dai et al. muestran que el modelo puede adaptarse mediante transferencia entre dominios cuando el conjunto de prueba y entrenamiento difieren sustancialmente \cite{10.5555/1619645.1619732}. Este tipo de trabajos amplía la aplicabilidad del método y demuestra que la simplicidad del modelo no impide introducir conocimiento adicional.
+
+\paragraph{5. Aplicaciones en dominios específicos}
+
+La efectividad de Naive Bayes también se verifica en tareas concretas. Sangounpao y Muenchaisri lo aplican a texto corto en un conjunto de datos pequeño, con apoyo ontológico \cite{Sangounpao2019}. Awotunde et al. lo integran en un sistema de análisis de reseñas de hoteles \cite{Awotunde2023131}. Pratmanto et al. lo usan en análisis de opiniones sobre aplicaciones móviles y Musleh et al. lo aplican al análisis de comentarios en YouTube \cite{Pratmanto2020,Musleh2023}. También se reportan usos en textos cortos en polaco, clasificación académica y categorización documental \cite{Wawer20191321,Humaidi2023,Wang2007,Mendoza2011251}. Estos estudios no siempre buscan perfeccionar el algoritmo, pero sí demuestran que su desempeño práctico sigue siendo útil en contextos variados.
+
+\begin{table}[H]
+\centering
+\caption{Estrategias de mejora de Naive Bayes y su efecto observado en la literatura}
+\label{tab:mejoras}
+\small
+\begin{tabularx}{\textwidth}{|L{4.1cm}|L{3.5cm}|X|X|}
+\hline
+\textbf{Estrategia} & \textbf{Referencias representativas} & \textbf{Efecto principal} & \textbf{Observación técnica} \\ \hline
+Normalización y ponderación por documento & \cite{Kim2006,10.1007/978-3-540-30549-1_43} & Mejora la calidad de la estimación de probabilidades. & Permite competir con clasificadores más complejos. \\ \hline
+Selección de características & \cite{CHEN20095432,YOUN2009477,Tang20162508} & Reduce ruido y esparsidad del vocabulario. & Incrementa discriminación y estabilidad. \\ \hline
+Ponderación de características & \cite{Jiang2016,ZHANG2016137,Ruan202020151} & Ajusta el peso de términos relevantes por clase. & Eleva la precisión sin perder simplicidad. \\ \hline
+Suavizado y ajuste de priors & \cite{Frank2006,10.1007/978-3-540-71496-5_73} & Evita probabilidades nulas y sesgo por clases desbalanceadas. & Mejora robustez y estabilidad numérica. \\ \hline
+Modelos no IID o de orden superior & \cite{Ganiz20111022,4554061,Gan2021} & Captura dependencias entre términos. & Reduce la rigidez del supuesto naive. \\ \hline
+Adaptación semántica o por transferencia & \cite{KIM2018128,10.5555/1619645.1619732} & Mejora rendimiento en dominios cambiantes o enriquecidos semánticamente. & Amplía la aplicabilidad del modelo. \\ \hline
+Ajuste local y fine-tuning & \cite{ELHINDI2020106652} & Recalibra probabilidades según vecinos cercanos o contexto local. & Es útil cuando el conjunto de entrenamiento es limitado. \\ \hline
+\end{tabularx}
+\end{table}
+
+\subsection{Síntesis del análisis de la literatura}
+
+El análisis integrado de la evidencia permite formular una conclusión intermedia muy clara: Naive Bayes es técnicamente efectivo para clasificación textual, pero su rendimiento depende del tratamiento previo del texto y del tipo de mejora aplicada al modelo. En su forma básica puede quedar por debajo de métodos más sofisticados en algunos conjuntos de datos, pero con selección de características, ponderación, suavizado y ajustes estructurales, su comportamiento mejora de manera consistente \cite{Kim2006,Frank2006,Jiang2016,ZHANG2016137,Tang20162508}.
+
+La literatura también sugiere que la comparación entre clasificadores no debe hacerse únicamente con la idea de \textit{ganador absoluto}. Zhang et al. muestran que la comparación bayesiana ofrece una visión más completa que las pruebas tradicionales \cite{10.1145/2911451.2911547}. Ese enfoque es importante porque, en clasificación textual, el mejor clasificador no siempre es el más complejo, sino el que mejor se adapta al corpus, a la métrica y a las restricciones de uso. En ese sentido, Naive Bayes conserva ventaja en escenarios donde se valora rapidez, interpretabilidad y capacidad suficiente con recursos limitados.
+
+\begin{figure}[H]
+\centering
+\fbox{\parbox{0.9\textwidth}{\centering Espacio reservado para la figura}}
+\caption{Relación entre las principales técnicas de mejora y el incremento observado en la efectividad de Naive Bayes.}
+\label{fig:relacion_mejoras}
+\end{figure}
+
+\section{Conclusiones}
+
+La pregunta de investigación planteada en este capítulo puede responderse con base en la evidencia revisada: Naive Bayes es una técnica efectiva para clasificación de texto, pero su efectividad es condicional y no absoluta. Su desempeño es especialmente sólido cuando el problema presenta alta dimensionalidad, textos breves, necesidad de interpretación rápida y restricciones de costo computacional. En esos escenarios, el clasificador mantiene una relación favorable entre simplicidad y rendimiento \cite{Kim2006,Frank2006,Sangounpao2019,Awotunde2023131}.
+
+Sin embargo, la efectividad del modelo mejora de forma notoria cuando se aplican técnicas complementarias. La selección de características reduce ruido y esparsidad; la ponderación de atributos incrementa la discriminación entre clases; el suavizado corrige probabilidades nulas; y las variantes no IID, semánticas o de ajuste local compensan las limitaciones del supuesto de independencia condicional \cite{CHEN20095432,YOUN2009477,Jiang2016,ZHANG2016137,Ganiz20111022,Gan2021,ELHINDI2020106652}. Por tanto, el Naive Bayes clásico debe entenderse como una base metodológica robusta, pero no necesariamente como su forma final más potente.
+
+También se concluye que la comparación justa de Naive Bayes con otros clasificadores exige una evaluación rigurosa. En algunos corpora, variantes mejoradas del modelo pueden acercarse a la precisión de clasificadores más complejos e incluso competir de forma equilibrada con ellos \cite{Kim2006,10.1145/2911451.2911547,KIM2018128}. Esto confirma que la simplicidad no implica necesariamente bajo rendimiento; más bien, obliga a analizar cuidadosamente el tipo de problema, la calidad de las características y la estrategia de modelado empleada.
+
+En síntesis, Naive Bayes sigue siendo una técnica vigente, útil y teóricamente sólida para la clasificación de textos. No es el clasificador universalmente mejor, pero sí uno de los más versátiles y didácticos para construir soluciones de minería textual cuando se combina con técnicas de mejora apropiadas. Desde el punto de vista técnico, su efectividad no radica únicamente en la fórmula bayesiana, sino en la manera en que se adapta a la estructura real del lenguaje y a las condiciones del corpus.
+
+\section{Referencias}
+
+\nocite{*}
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}

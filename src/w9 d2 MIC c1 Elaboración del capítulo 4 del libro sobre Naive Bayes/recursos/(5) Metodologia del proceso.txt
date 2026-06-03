@@ -1,0 +1,12 @@
+Metodología del proceso: Los estudiantes de la asignatura de metodología de la investigación en computación, al inicio de la asignatura se les asignó una pregunta de investigación relacionada con las técnicas de la Inteligencia Artificial. Son un total de 43 preguntas/estudiantes.
+
+Inicialmente ellos definieron las cadenas de búsqueda a partir de la descomposición en palabras claves de la pregunta de investigación en conjunto con operadores lógicos.
+
+Posterior, se realizó la ejecución de dichas cadenas en las bases de datos IEEE Xplore, ACM Digital Lybrary. Un primer entregable fue una matriz con 5 artículos científicos localizados en cualquiera de esas bases de datos. Aquí se empezó a usar un gestor bibliográfico como Mendeley y Zotero, además, del uso de Oveleaf para la escritura en LaTeX y NotebookLM para extraer información no sesgada de los artículos en una matriz de extracción de datos. 
+
+Luego, se expandieron las bases de datos a ScienceDirect, Springer y Lens, para localizar 15 artículos científicos en el mismo contexto de la pregunta de investigación. Teniendo en total 20 artículos en su base de datos en el gestor bibliográfico. Aquí los estudiantes aprendieron el método de jerarquización usando NotebookLM, para identificar esos artículos útiles para su pregunta de investigación.
+
+Finalmente, se realizó la búsqueda en la base de datos Scopus, utilizando la cadena de búsqueda original y/o una mejorada para extraer los metadatos de los artículos relacionados con la pregunta, luego se exportó esos metadatos en archivo de texto y en formato BibTex para que sean usados tanto en la jerarquización con NotebookLM como para la gestión con Mendeley y Overlef de los artículos que apoyen a responder la pregunta de investigación. Aquí se usó Scopus AI para generar un reporte sobre cada pregunta de investigación que finalmente fue exportado en PDF.
+
+
+Objetivo: rescatar las técnicas de IA que existen antes de la llegada de la IA Generativa, y que son la base teórica para los sistemas inteligentes, y muchas de ellas incluidas en la IA Generativa, pero que no son conocidas , y que son abordadas por los ingenierons que construyen herramientas de IA.

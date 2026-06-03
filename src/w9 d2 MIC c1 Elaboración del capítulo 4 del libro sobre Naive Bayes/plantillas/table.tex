@@ -1,0 +1,30 @@
+\documentclass[11pt,oneside]{book} 
+
+% --- Paquetes Básicos e Idioma ---
+\usepackage[spanish,es-tabla]{babel} 
+\usepackage[utf8]{inputenc}        
+\usepackage[T1]{fontenc}           
+\usepackage{geometry}              
+\geometry{a4paper, margin=1in}
+
+% --- Paquetes Científicos Estándar ---
+\usepackage{amsmath,amsfonts,amssymb} 
+\usepackage{graphicx}              
+\usepackage{booktabs}              
+\usepackage{cite}                  
+\usepackage{hyperref}      
+
+
+\begin{table}[h]
+\centering
+\caption{Dimensiones de análisis en redes probabilísticas clínicas.}
+\label{tab:rendimiento}
+\begin{tabular}{lll}
+\toprule
+\textbf{Parámetro} & \textbf{Ventaja Tecnológica} & \textbf{Restricción} \\
+\midrule
+Cómputo & Consumo mínimo de memoria RAM & Complejidad algorítmica NP-Hard \\
+Explicabilidad & Trazabilidad analítica exacta & Dependencia de expertos de dominio \\
+\bottomrule
+\end{tabular}
+\end{table}
